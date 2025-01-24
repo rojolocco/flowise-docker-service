@@ -1,6 +1,7 @@
 services:
   flowise:
     image: flowiseai/flowise
+    container_name: flowise
     restart: always
     env_file:
       - .env
