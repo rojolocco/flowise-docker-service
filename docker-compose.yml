@@ -1,0 +1,26 @@
+services:
+  flowise:
+    image: flowiseai/flowise
+    restart: always
+    env_file:
+      - .env.dev
+    ports:
+      - "${PORT}:3000"
+    volumes:
+      - flowise_data:/root/.flowise
+    entrypoint: /bin/sh -c "sleep 3; flowise start"
+    networks:
+      - caddy_network
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: "1"
+
+volumes:
+  flowise_data:
+    driver: local
+
+networks:
+  caddy_network:
+    external: true
